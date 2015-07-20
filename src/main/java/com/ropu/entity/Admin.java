@@ -17,6 +17,8 @@ public class Admin extends BaseEntity {
 
     private String password;
 
+    private Integer type;
+
     public Integer getId() {
         return id;
     }
@@ -47,5 +49,13 @@ public class Admin extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

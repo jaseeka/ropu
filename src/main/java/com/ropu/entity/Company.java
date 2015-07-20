@@ -15,7 +15,7 @@ public class Company extends BaseEntity {
 
     private String name;
 
-    private Date updateTime;
+    private Date time;
 
     private String content;
 
@@ -29,12 +29,12 @@ public class Company extends BaseEntity {
         this.name = name;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getContent() {
