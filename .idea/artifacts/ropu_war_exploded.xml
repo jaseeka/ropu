@@ -59,6 +59,8 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.6" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">
