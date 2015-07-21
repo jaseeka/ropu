@@ -1,6 +1,5 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: Administrator
+  Created by jaseeka
   Date: 2015/7/21
   Time: 9:46
   To change this template use File | Settings | File Templates.
@@ -16,7 +15,7 @@
   <script type="text/javascript" src="/js/admin/main.js"></script>
 </head>
 <body class="easyui-layout">
-<div class="ui-header" data-options="region:'north',split:true,border:false" style="height:40px;overflow: hidden;">
+<div class="ui-header" data-options="region:'north',split:true,border:false,resizable:false" style="height:40px;overflow: hidden;">
   <h1>冬日暖阳后台管理系统</h1>
   <div  class="ui-login">
     <div class="ui-login-info">
@@ -30,11 +29,11 @@
 <!-- 树形菜单 -->
 <div data-options="region:'west',split:true,title:'导航'" style="width:200px;">
   <div id="tree-box" class="easyui-accordion" data-options="fit:true,border:false">
-      <div title="第一级">
-        <a class="menu-item" href="#">目录1</a>
-        <a class="menu-item" href="#">目录2</a>
-        <a class="menu-item" href="#">目录3</a>
-      </div>
+    <div title="第一级">
+      <a class="menu-item" href="#">目录1</a>
+      <a class="menu-item" href="#">目录2</a>
+      <a class="menu-item" href="#">目录3</a>
+    </div>
     <div title="第二级">
       <a class="menu-item" href="#">目录1</a>
       <a class="menu-item" href="#">目录2</a>
