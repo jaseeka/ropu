@@ -48,11 +48,9 @@
 <div data-options="region:'center'" >
   <div class="easyui-tabs" id="tab-box" data-options="fit:true,border:false">
     <div title="欢迎" style="padding:20px;overflow:hidden;">
-
       <div style="margin-top:20px;">
         <h1>冬日暖阳后台管理系统</h1>
       </div>
-
     </div>
   </div>
 </div>
