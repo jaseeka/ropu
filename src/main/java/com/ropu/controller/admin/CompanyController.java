@@ -5,8 +5,8 @@ import com.ropu.base.utils.HtmlUtils;
 import com.ropu.common.Page;
 import com.ropu.common.ResultCode;
 import com.ropu.common.ResultEntity;
-import com.ropu.entity.Product;
-import com.ropu.service.IProductService;
+import com.ropu.entity.Company;
+import com.ropu.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,24 +21,24 @@ import java.util.Map;
 /**
  * Created by jaseeka
  * date 2015/7/22
- * time 15:19
+ * time 21:00
  */
 @Controller
 @RequestMapping("/admin")
-public class ProductController extends BaseWebController {
+public class CompanyController extends BaseWebController {
 
     @Autowired
-    private IProductService productService;
+    private ICompanyService companyService;
 
     /**
      * 页面跳转
      * @param request
      * @return
      */
-    @RequestMapping(value = "/product")
+    @RequestMapping(value = "/company")
     public ModelAndView main(HttpServletRequest request){
         Map<String, Object> context = getRootMap(request);
-        return forword("admin/product", context);
+        return forword("admin/company", context);
     }
 
     /**
@@ -50,9 +50,9 @@ public class ProductController extends BaseWebController {
      * @param pageSort
      * @param pageOrder
      */
-    @RequestMapping(value = "productList")
-    public void productList(
-            Product model,
+    @RequestMapping(value = "companyList")
+    public void companyList(
+            Company model,
             HttpServletResponse response,
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer rows,
@@ -62,14 +62,14 @@ public class ProductController extends BaseWebController {
         // 分页信息封装
         Page pages = new Page(page, rows, pageSort, pageOrder);
         // 获取信息
-        PageList<Product> productPageList = productService.getProductList(model, pages);
-        if (productPageList != null || productPageList.size() > 0) {
-            pages.setTotal(productPageList.getPaginator().getTotalCount());
+        PageList<Company> companyPageList = companyService.getCompanyList(model, pages);
+        if (companyPageList != null || companyPageList.size() > 0) {
+            pages.setTotal(companyPageList.getPaginator().getTotalCount());
         }
         //设置页面数据
         Map<String, Object> jsonMap = new HashMap<String, Object>();
         jsonMap.put("total", pages.getTotal());
-        jsonMap.put("rows", productPageList);
+        jsonMap.put("rows", companyPageList);
         HtmlUtils.writerJson(response, jsonMap);
     }
 
@@ -78,9 +78,9 @@ public class ProductController extends BaseWebController {
      * @param model
      * @param response
      */
-    @RequestMapping(value = "saveProduct")
-    public void saveProduct(
-            Product model,
+    @RequestMapping(value = "saveCompany")
+    public void saveCompany(
+            Company model,
             HttpServletResponse response
     ){
         ResultEntity resultEntity = new ResultEntity();
@@ -91,9 +91,9 @@ public class ProductController extends BaseWebController {
         }
         Boolean result = false;
         if (model.getId() == null || model.getId() <= 0){
-            result = productService.addProduct(model);
+            result = companyService.addCompany(model);
         } else {
-            result = productService.updateProduct(model);
+            result = companyService.updateCompany(model);
         }
 
         if (result){
@@ -112,8 +112,8 @@ public class ProductController extends BaseWebController {
      * @param id
      * @param response
      */
-    @RequestMapping(value = "deleteProduct")
-    public void deleteProduct(
+    @RequestMapping(value = "deleteCompany")
+    public void deleteCompany(
             @RequestParam(value = "id") Integer id,
             HttpServletResponse response
     ){
@@ -123,7 +123,7 @@ public class ProductController extends BaseWebController {
             resultEntity.setCode(ResultCode.FAILURE);
             resultEntity.setMsg(ResultCode.MFAILURE);
         }
-        Boolean result = productService.deleteProductById(id);
+        Boolean result = companyService.deleteCompanyById(id);
 
         if (result){
             resultEntity.setCode(ResultCode.SUCCESS);
@@ -135,5 +135,4 @@ public class ProductController extends BaseWebController {
 
         HtmlUtils.writerJson(response, resultEntity);
     }
-
 }

@@ -11,7 +11,6 @@ import org.aspectj.weaver.patterns.PerObject;
  * time 15:19
  */
 public interface IProductService {
-
     /**
      * 获取产品列表
      * @param product
