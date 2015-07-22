@@ -269,7 +269,7 @@ div.edui-box {
     position: absolute;
     bottom: -25px;
     left: 0;
-    z-index: 1009;
+    z-index: 10009;
     width: 99.9%;
 }
 
@@ -373,7 +373,7 @@ div.edui-box {
 }
 /* 可选中按钮弹出菜单*/
 .edui-default .edui-menu {
-    z-index: 3000;
+    z-index: 30000;
 }
 
 .edui-default .edui-menu .edui-popup-content {
@@ -1029,7 +1029,7 @@ div.edui-box {
 
 /* 弹出菜单 */
 .edui-default .edui-popup {
-    z-index: 3000;
+    z-index: 30000;
     background-color: #ffffff;
     width:auto;
     height:auto;
@@ -1168,7 +1168,7 @@ div.edui-box {
 }
 /* 弹出对话框按钮和对话框大小 */
 .edui-default .edui-dialog {
-    z-index: 2000;
+    z-index: 20000;
     position: absolute;
 
 }
@@ -1638,7 +1638,7 @@ div.edui-box {
     height: 11px;
     overflow: hidden;
     background: url(../images/tangram-colorpicker.png) 0px -200px repeat-x;
-    z-index: 1000;
+    z-index: 10000;
 
 }
 .edui-colorpicker-sliderMain {
@@ -1775,7 +1775,7 @@ div.edui-box {
 .edui-default .edui-for-emotion .edui-popup-content
 {
     position: relative;
-    z-index: 555
+    z-index: 5550
 }
 
 .edui-default .edui-for-emotion .edui-splitborder {

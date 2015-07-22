@@ -10,6 +10,10 @@
 <%--公共资源JavaScript、css--%>
 <script type="text/javascript" src="/js/easyui-1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="/js/easyui-1.4.3/jquery.easyui.min.js"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/js/ueditor-1.4.3/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/js/ueditor-1.4.3/ueditor.all.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/js/easyui-1.4.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="/js/easyui-1.4.3/themes/icon.css">

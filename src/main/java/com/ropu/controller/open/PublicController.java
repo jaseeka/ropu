@@ -2,10 +2,12 @@ package com.ropu.controller.open;
 
 import com.ropu.base.utils.FileUtils;
 import com.ropu.base.utils.JsonUtils;
+import com.ropu.common.ResultCode;
 import com.ropu.common.ResultEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,20 +26,18 @@ import java.util.Date;
 @RequestMapping("/open")
 public class PublicController {
 
-
     /**
      * 文件上传
-     * @param suffix
      * @param type
      * @param file
      * @param request
      * @param response
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "/uploadFile", produces = "application/json;charset=UTF-8")
     public String uploadFile(
-            @RequestParam(value = "suffix") String suffix,
-            @RequestParam(value = "type") String type,
+            @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "file")MultipartFile file,
             HttpServletRequest request,
             HttpServletResponse response
@@ -46,17 +46,28 @@ public class PublicController {
 
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        // 获取后缀
+        String suffix = file.getOriginalFilename().substring
+                (file.getOriginalFilename().lastIndexOf("."));
 
-        String root = request.getSession().getServletContext().getRealPath("/");
+        String root = request.getSession().getServletContext().getRealPath("");
 
-        String path = root + "upload" + File.separator + dateFormat.format(now) + File.separator;
-        String fileName = String.valueOf(now.getTime())+"."+suffix;
+        String path = File.separator + "upload" + File.separator + dateFormat.format(now) + File.separator;
+        String fileName = String.valueOf(now.getTime()) + suffix;
+
+        String fileUrl = path + fileName;
 
         try {
-            FileUtils.saveFile(path, fileName, file.getInputStream());
+            FileUtils.saveFile(root + path, fileName, file.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            resultEntity.setCode(ResultCode.FAILURE);
+            resultEntity.setMsg(ResultCode.MFAILURE);
+            return JsonUtils.Object2Json(resultEntity);
         }
+
+        resultEntity.setCode(ResultCode.SUCCESS);
+        resultEntity.setMsg(ResultCode.MSUCCESS);
+        resultEntity.getData().put("url",fileUrl);
 
         return JsonUtils.Object2Json(resultEntity);
     }

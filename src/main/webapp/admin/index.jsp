@@ -30,7 +30,7 @@
 <div data-options="region:'west',split:true,title:'导航'" style="width:200px;">
   <div id="tree-box" class="easyui-accordion" data-options="fit:true,border:false">
     <div title="第一级">
-      <a class="menu-item" href="#">目录1</a>
+      <a class="menu-item" href="/admin/product">目录1</a>
       <a class="menu-item" href="#">目录2</a>
       <a class="menu-item" href="#">目录3</a>
     </div>

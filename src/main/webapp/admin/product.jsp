@@ -8,6 +8,7 @@
 <html>
 <head>
   <%@include file="/common/resource-admin.jsp" %>
+  <script type="text/javascript" src="/js/admin/product.js"></script>
 </head>
 <body class="easyui-layout">
 <!-- Search panel start -->
@@ -30,22 +31,18 @@
 </div>
 <!-- DataList end -->
 <!-- Edit Form -->
-<div id="edit-win" class="easyui-dialog" title="医生信息修改" data-options="closed:true,iconCls:'icon-edit',modal:true"
-     style="width:500px;height:450px;">
+<div id="edit-win" class="easyui-window" title="医生信息修改" data-options="closed:true,iconCls:'icon-edit',modal:false,fit:true,zIndex:-100">
   <%-- 图片上传form--%>
   <div id="imageform" style="display:none;">
-    <form id="myform" action="/api/open/uploadFile" method="post" enctype="multipart/form-data">
+    <form id="myform" action="/open/uploadFile" method="post" enctype="multipart/form-data">
       <input type="file" id="file"onchange="dictFile(this)" name="file" style="width: 65px;">
-      <input class="easyui-textbox" type="text" style="width:200px; display:none;" name="suffix" id="suffix" />
-      <input class="easyui-textbox" type="text" style="width:200px; display:none;" name="type" id="type" />
       <input class="easyui-textbox" type="text" style="width:200px; display:none;" name="imgid" id="imgid" />
     </form>
   </div>
   <div class="ui-edit">
-    <div class="ftitle">医生信息修改</div>
     <div class="fitem">
       <div class="div-line">
-        <form id="editForm" class="ui-form" method="post" action="updateDoctor.do">
+        <form id="editForm" class="ui-form" method="post" action="">
           <input class="hidden" name="id" id="id">
           <label>图片:</label>
           <img src="" alt="头像" name="img" id="imgimg" style="width:70px;height:70px;padding-left:15px;" onclick="imgClick('img')">
@@ -54,14 +51,17 @@
           <label>姓名:</label>
           <input class="easyui-textbox" type="text" style="width: 200px"  name="name" id="name" />
           </br></br>
-
+          <script id="container" name="content" type="text/plain" style="height:500px;"></script>
+          <script type="text/javascript">
+            var ue = UE.getEditor('container');
+          </script>
           </br></br>
           <!-- 保存按钮 -->
           <div style="padding: 5px;text-align: right;">
-            <a href="#" class="l-btn" id="save-btn" onclick="saveDoctor()" >
-                                <span class="l-btn-left">
-                                        <span class="l-btn-text">保存</span>
-                                </span>
+            <a href="#" class="l-btn" id="save-btn" onclick="save()" >
+              <span class="l-btn-left">
+                      <span class="l-btn-text">保存</span>
+              </span>
             </a>
           </div>
         </form>
