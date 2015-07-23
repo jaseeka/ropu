@@ -15,30 +15,24 @@ public class FileUtils {
      * @param fileName
      * @param inputStream
      */
-    public static void saveFile(String rootPath, String fileName, InputStream inputStream){
+    public static void saveFile(String rootPath, String fileName, InputStream inputStream) throws IOException {
         File fileRoot = new File(rootPath);
         if (!fileRoot.exists()){
-            fileRoot.mkdir();
+            fileRoot.mkdirs();
         }
 
-        try {
-            FileOutputStream fos = new FileOutputStream(rootPath + fileName);
+        FileOutputStream fos = new FileOutputStream(rootPath + fileName);
 //            FileInputStream fis = new FileInputStream(file);
-            byte[] buf = new byte[1024];
-            int len = 0;
-            while ((len = inputStream.read(buf)) > 0){
-                fos.write(buf, 0, len);
-            }
-            if (inputStream != null){
-                inputStream.close();
-            }
-            if (fos != null){
-                fos.close();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        byte[] buf = new byte[1024];
+        int len = 0;
+        while ((len = inputStream.read(buf)) > 0){
+            fos.write(buf, 0, len);
+        }
+        if (inputStream != null){
+            inputStream.close();
+        }
+        if (fos != null){
+            fos.close();
         }
     }
 

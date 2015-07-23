@@ -46,8 +46,8 @@
           <input class="hidden" name="id" id="id">
           <label>图片:</label>
           <img src="" alt="头像" name="img" id="imgimg" style="width:70px;height:70px;padding-left:15px;" onclick="imgClick('img')">
+          <input type="text" style="width:200px; display:none;" name="img" id="img" />
           </br></br>
-          <input class="easyui-textbox" type="text" style="width:200px; display:none;" name="img" id="img" />
           <label>姓名:</label>
           <input class="easyui-textbox" type="text" style="width: 200px"  name="name" id="name" />
           </br></br>

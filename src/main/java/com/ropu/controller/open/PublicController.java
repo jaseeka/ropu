@@ -60,6 +60,7 @@ public class PublicController {
         try {
             FileUtils.saveFile(root + path, fileName, file.getInputStream());
         } catch (IOException e) {
+            e.printStackTrace();
             resultEntity.setCode(ResultCode.FAILURE);
             resultEntity.setMsg(ResultCode.MFAILURE);
             return JsonUtils.Object2Json(resultEntity);
