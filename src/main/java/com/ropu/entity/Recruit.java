@@ -5,6 +5,7 @@ import com.ropu.base.dao.BaseEntity;
 import java.util.Date;
 
 /**
+ * 招聘
  * Created by jaseeka
  * date 2015/7/20
  * time 15:28

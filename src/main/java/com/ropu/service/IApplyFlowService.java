@@ -39,4 +39,11 @@ public interface IApplyFlowService {
      * @return
      */
     public Boolean deleteApplyFlowById(Integer id);
+
+    /**
+     * 根据id获取
+     * @param id
+     * @return
+     */
+    public ApplyFlow getApplyFlowById(Integer id);
 }

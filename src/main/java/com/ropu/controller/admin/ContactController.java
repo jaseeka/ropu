@@ -5,6 +5,7 @@ import com.ropu.base.utils.HtmlUtils;
 import com.ropu.common.Page;
 import com.ropu.common.ResultCode;
 import com.ropu.common.ResultEntity;
+import com.ropu.common.TypeEnum;
 import com.ropu.entity.Contact;
 import com.ropu.entity.Product;
 import com.ropu.service.IContactService;
@@ -37,9 +38,14 @@ public class ContactController extends BaseWebController {
      * @return
      */
     @RequestMapping(value = "/contact")
-    public ModelAndView main(HttpServletRequest request){
+    public ModelAndView main(Integer type, HttpServletRequest request){
         Map<String, Object> context = getRootMap(request);
-        return forword("admin/contact", context);
+        if (TypeEnum.LanguageEnum.CN.ordinal() == type){
+            return forword("admin/contact_cn", context);
+        } else if (TypeEnum.LanguageEnum.EN.ordinal() == type){
+            return forword("admin/contact_cn", context);
+        }
+        return forword("admin/contact_cn", context);
     }
 
     /**

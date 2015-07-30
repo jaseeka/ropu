@@ -5,6 +5,7 @@ import com.ropu.base.dao.BaseEntity;
 import java.util.Date;
 
 /**
+ * 联系我们
  * Created by jaseeka
  * date 2015/7/20
  * time 16:43

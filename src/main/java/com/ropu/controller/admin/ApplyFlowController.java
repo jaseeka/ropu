@@ -5,6 +5,7 @@ import com.ropu.base.utils.HtmlUtils;
 import com.ropu.common.Page;
 import com.ropu.common.ResultCode;
 import com.ropu.common.ResultEntity;
+import com.ropu.common.TypeEnum;
 import com.ropu.entity.ApplyFlow;
 import com.ropu.entity.Product;
 import com.ropu.service.IApplyFlowService;
@@ -37,9 +38,14 @@ public class ApplyFlowController extends BaseWebController {
      * @return
      */
     @RequestMapping(value = "/applyFlow")
-    public ModelAndView main(HttpServletRequest request){
+    public ModelAndView main(Integer type, HttpServletRequest request){
         Map<String, Object> context = getRootMap(request);
-        return forword("admin/applyFlow", context);
+        if (TypeEnum.LanguageEnum.CN.ordinal() == type){
+            return forword("admin/applyFlow_cn", context);
+        } else if (TypeEnum.LanguageEnum.EN.ordinal() == type){
+            return forword("admin/applyFlow_cn", context);
+        }
+        return forword("admin/applyFlow_cn", context);
     }
 
     /**
@@ -129,6 +135,36 @@ public class ApplyFlowController extends BaseWebController {
         if (result){
             resultEntity.setCode(ResultCode.SUCCESS);
             resultEntity.setMsg(ResultCode.MSUCCESS);
+        }else {
+            resultEntity.setCode(ResultCode.FAILURE);
+            resultEntity.setMsg(ResultCode.MFAILURE);
+        }
+
+        HtmlUtils.writerJson(response, resultEntity);
+    }
+
+    /**
+     * 根据id获取
+     * @param id
+     * @param response
+     */
+    @RequestMapping(value = "getApplyFlowById")
+    public void getApplyFlowById(
+            @RequestParam(value = "id") Integer id,
+            HttpServletResponse response
+    ){
+        ResultEntity resultEntity = new ResultEntity();
+
+        if (id == null){
+            resultEntity.setCode(ResultCode.FAILURE);
+            resultEntity.setMsg(ResultCode.MFAILURE);
+        }
+        ApplyFlow result = applyFlowService.getApplyFlowById(id);
+
+        if (result != null){
+            resultEntity.setCode(ResultCode.SUCCESS);
+            resultEntity.setMsg(ResultCode.MSUCCESS);
+            resultEntity.getData().put("applyFlow",result);
         }else {
             resultEntity.setCode(ResultCode.FAILURE);
             resultEntity.setMsg(ResultCode.MFAILURE);

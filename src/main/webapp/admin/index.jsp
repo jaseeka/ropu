@@ -16,7 +16,7 @@
 </head>
 <body class="easyui-layout">
 <div class="ui-header" data-options="region:'north',split:true,border:false,resizable:false" style="height:40px;overflow: hidden;">
-  <h1>冬日暖阳后台管理系统</h1>
+  <h1>罗普后台管理系统</h1>
   <div  class="ui-login">
     <div class="ui-login-info">
       欢迎 <span class="orange">${user.nickname}</span> 登录系统
@@ -29,16 +29,20 @@
 <!-- 树形菜单 -->
 <div data-options="region:'west',split:true,title:'导航'" style="width:200px;">
   <div id="tree-box" class="easyui-accordion" data-options="fit:true,border:false">
-    <div title="第一级">
-      <a class="menu-item" href="/admin/product">目录1</a>
-      <a class="menu-item" href="#">目录2</a>
-      <a class="menu-item" href="#">目录3</a>
+    <div title="中文目录">
+      <a class="menu-item" href="/admin/product?type=0">产品列表(中文)</a>
+      <a class="menu-item" href="/admin/applyFlow?type=0">申请流程(中文)</a>
+      <a class="menu-item" href="/admin/company?type=0">公司信息(中文)</a>
+      <a class="menu-item" href="/admin/contact?type=0">联系我们(中文)</a>
+      <a class="menu-item" href="/admin/recruit?type=0">招聘信息(中文)</a>
     </div>
-    <div title="第二级">
-      <a class="menu-item" href="#">目录1</a>
-      <a class="menu-item" href="#">目录2</a>
-      <a class="menu-item" href="#">目录3</a>
-    </div>
+    <div title="英文目录">
+    <a class="menu-item" href="/admin/product?type=1">产品列表(英文)</a>
+    <a class="menu-item" href="/admin/applyFlow?type=1">申请列表(英文)</a>
+    <a class="menu-item" href="/admin/company?type=1">公司信息(英文)</a>
+    <a class="menu-item" href="/admin/contact?type=1">联系我们(英文)</a>
+    <a class="menu-item" href="/admin/recruit?type=1">招聘信息(英文)</a>
+  </div>
   </div>
 </div>
 <div data-options="region:'south',split:true,border:false" style="height: 30px;overflow:hidden;">

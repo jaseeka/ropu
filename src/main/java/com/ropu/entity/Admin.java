@@ -3,6 +3,7 @@ package com.ropu.entity;
 import com.ropu.base.dao.BaseEntity;
 
 /**
+ * 管理员
  * Created by jaseeka
  * date 2015/7/20
  * time 14:47

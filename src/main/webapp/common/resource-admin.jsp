@@ -14,6 +14,8 @@
 <script type="text/javascript" src="/js/ueditor-1.4.3/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
 <script type="text/javascript" src="/js/ueditor-1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="/js/admin/utils.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/js/easyui-1.4.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="/js/easyui-1.4.3/themes/icon.css">

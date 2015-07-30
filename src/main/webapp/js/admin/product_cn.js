@@ -5,7 +5,7 @@
  */
 $(function(){
     $("#data-list").datagrid({
-        title : "标题",
+        title : "产品",
         striped : false,
         pagination : true,
         pageSize : 15,
@@ -14,10 +14,15 @@ $(function(){
         fit : true,
         singleSelect : true,
         checkOnSelect : true,
-        url : "productList",
+        url : "productList?type=0",
         columns : [[
             {field : "id", checkbox : true},
-            {field : "name", title : "名称", width : 100, sortable : true}
+            {field : "name", title : "名称", width : 200, sortable : true},
+            {field : "time", title : "时间", width : 150, sortable : true,
+                formatter:function(value,row,index){
+                    return dateFormate(value,true);
+                }
+            }
         ]],
         toolbar : [
             {
@@ -60,22 +65,21 @@ $(function(){
 function edit(data){
     if (data) {
         data = data[0];
-/*        $("#id").val(data.id);
-        $("#title").val(data.title);
-        $("#pictureUrl").val(data.pictureUrl);
-        $("#imgpictureUrl").attr("src", data.pictureUrl);
-        $("#intro").val(data.intro);
+        $("#id").val(data.id);
+        $("#name").textbox('setValue',data.name);
+        $("#img").val(data.img);
+        $("#imgimg").attr("src", data.img);
+        $("#time").val(dateFormate(data.time, false));
         var ue = UE.getEditor('container');
-        ue.setContent(data.content);*/
+        ue.setContent(data.content);
     }else{
-       /* $("#id").val("");
-        $("#title").val("");
+        $("#id").val("");
+        $("#name").textbox('setValue',"");
+        $("#img").val("");
+        $("#imgimg").attr("src", "");
         $("#time").val("");
-        $("#pictureUrl").val("");
-        $("#imgpictureUrl").attr("src", "");
-        $("#intro").val("");
         var ue = UE.getEditor('container');
-        ue.setContent("");*/
+        ue.setContent("");
     }
     $("#edit-win").window("open");
 }
@@ -85,7 +89,7 @@ function del(data){
     $.messager.confirm("确认", "确定删除该数据", function (r) {
         if (r) {
             $.post(
-                "/admin/deleteNews",
+                "/admin/deleteProduct",
                 {
                     id : data.id
                 },
@@ -103,30 +107,27 @@ function del(data){
 // 保存信息
 function save(){
 
-    if ( $("#title").val() == undefined ||  $("#title").val() == ""){
+    if ( $("#name").val() == undefined ||  $("#name").val() == ""){
         $.messager.alert('警告','标题不能为空！.','warning');
         return;
     }else if ( $("#time").val() == undefined ||  $("#time").val() == ""){
         $.messager.alert('警告','显示时间不能为空！.','warning');
         return;
-    }else if ( $("#pictureUrl").val() == undefined ||  $("#pictureUrl").val() == ""){
+    }else if ( $("#img").val() == undefined ||  $("#img").val() == ""){
         $.messager.alert('警告','请上传缩略图！.','warning');
-        return;
-    }else if ( $("#intro").val() == undefined ||  $("#intro").val() == ""){
-        $.messager.alert('警告','简介不能为空！.','warning');
         return;
     }
     var ue = UE.getEditor('container');
     var content = ue.getContent();
     $.post(
-        "/admin/saveNews",
+        "/admin/saveProduct",
         {
-            id         : $("#id").val(),
-            title      : $("#title").val(),
-            time       : $("#time").val(),
-            pictureUrl : $("#pictureUrl").val(),
-            intro      : $("#intro").val(),
-            content    : content
+            id      : $("#id").val(),
+            type    : 0,
+            name    : $("#name").val(),
+            time    : $("#time").val(),
+            img     : $("#img").val(),
+            content : content
         },
         function(data){
             $.messager.alert('',data.msg,'');
@@ -137,34 +138,10 @@ function save(){
 };
 // 保存信息结束
 // 搜索
-function searchUserManual(){
+function searchList(){
     $('#data-list').datagrid('reload',{
-        title: $('#Stitle').val()
+        name: $('#Sname').val()
     });
 };
 // 搜索结束
 
-// 图片点击事件
-function imgClick(id){
-    $("#imgid").val(id);
-
-    $("#file").click();
-}
-
-// 图片上传方法
-function dictFile(value){
-
-    var id = $("#imgid").val();
-
-    $("#myform").form("submit",{
-        success :function(data){
-            var json = eval('('+data+')');
-            if(json.code == 0){
-                $("#"+id).val(json.data.url);
-                $("#img"+id).attr("src",json.data.url);
-            }else{
-                $.messager.alert('警告',json.msg,'warning');
-            }
-        }
-    })
-};

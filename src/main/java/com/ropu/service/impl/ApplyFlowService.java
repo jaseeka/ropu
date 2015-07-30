@@ -84,4 +84,18 @@ public class ApplyFlowService implements IApplyFlowService {
 
         return result > 0 ? true : false;
     }
+
+    /**
+     * 根据id获取
+     * @param id
+     * @return
+     */
+    public ApplyFlow getApplyFlowById(Integer id){
+        if (id == null || id <= 0){
+            return null;
+        }
+        ApplyFlow applyFlow = new ApplyFlow();
+        applyFlow.setId(id);
+        return applyFlowDao.selectById(applyFlow);
+    }
 }

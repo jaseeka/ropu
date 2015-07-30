@@ -5,6 +5,7 @@ import com.ropu.base.utils.HtmlUtils;
 import com.ropu.common.Page;
 import com.ropu.common.ResultCode;
 import com.ropu.common.ResultEntity;
+import com.ropu.common.TypeEnum;
 import com.ropu.entity.Product;
 import com.ropu.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,14 @@ public class ProductController extends BaseWebController {
      * @return
      */
     @RequestMapping(value = "/product")
-    public ModelAndView main(HttpServletRequest request){
+    public ModelAndView main(Integer type, HttpServletRequest request){
         Map<String, Object> context = getRootMap(request);
-        return forword("admin/product", context);
+        if (TypeEnum.LanguageEnum.CN.ordinal() == type){
+            return forword("admin/product_cn", context);
+        } else if (TypeEnum.LanguageEnum.EN.ordinal() == type){
+            return forword("admin/product_cn", context);
+        }
+        return forword("admin/product_cn", context);
     }
 
     /**

@@ -36,7 +36,7 @@ public class CompanyController extends BaseWebController {
      * @return
      */
     @RequestMapping(value = "/company")
-    public ModelAndView main(HttpServletRequest request){
+    public ModelAndView main(Integer type, HttpServletRequest request){
         Map<String, Object> context = getRootMap(request);
         return forword("admin/company", context);
     }
