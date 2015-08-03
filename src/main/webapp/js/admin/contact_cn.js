@@ -1,90 +1,37 @@
 /**
  * Created by jaseeka
- * date 2015/7/29
- * time 11:19
+ * date 2015/7/21
+ * time 14:21
  */
 $(function(){
-    $("#data-list").datagrid({
-        title : "标题",
-        striped : false,
-        pagination : true,
-        pageSize : 15,
-        pageList : [5,10,15,20],
-        iconCls : "icon-save",
-        fit : true,
-        singleSelect : true,
-        checkOnSelect : true,
-        url : "productList",
-        columns : [[
-            {field : "id", checkbox : true},
-            {field : "name", title : "名称", width : 200, sortable : true},
-            {field : "time", title : "时间", width : 150, sortable : true,
-                formatter:function(value,row,index){
-                    return dateFormate(value,true);
-                }
+    $.post(
+        "/admin/contactById",
+        {
+            id : 1
+        },
+        function(data){
+            if (data.code == 0){
+                edit(data.data);
+            }else{
+                $.messager.alert('',data.msg,'');
             }
-        ]],
-        toolbar : [
-            {
-                id: 'btnedit', iconCls: 'icon-edit', text: '编辑', btnType: 'edit',
-                handler: function () {
-                    var selected = $("#data-list").datagrid('getChecked');
-                    if (selected.length <= 0) {
-                        $.messager.alert('警告','未选中记录.','warning');
-                    }
-                    else if (selected.length > 1) {
-                        $.messager.alert('警告','只能选择一行记录.','warning');
-                    } else {
-                        edit(selected);
-                    }
-                }
-            },
-            {id: 'btneadd', iconCls: 'icon-add', text: '添加', btnType: 'edit',
-                handler: function () {
-                    edit();
-                }
-            },
-            {id: 'btnedel', iconCls: 'icon-remove', text: '删除', btnType: 'remove',
-                handler: function () {
-                    var selected = $("#data-list").datagrid('getChecked');
-                    if (selected.length <= 0) {
-                        $.messager.alert('警告','未选中记录.','warning');
-                    }
-                    else if (selected.length > 1) {
-                        $.messager.alert('警告','只能选择一行记录.','warning');
-                    } else {
-                        del(selected);
-                    }
-                }
-            }
-        ]
-    });
+        }
+    );
 });
 
 // 编辑
 function edit(data){
-    if (data) {
-        data = data[0];
-        $("#id").val(data.id);
-        $("#name").val(data.name);
-        $("#img").val(data.img);
-        $("#imgimg").attr("src", data.img);
-        $("#time").val(dateFormate(data.time, false));
-        var ue = UE.getEditor('container');
-        ue.addListener("ready", function () {
-            ue.setContent(data.content);
-        });
-    }else{
-        $("#id").val("");
-        $("#name").val("");
-        $("#img").val("");
-        $("#imgimg").attr("src", "");
-        $("#time").val("");
-        var ue = UE.getEditor('container');
-        ue.addListener("ready", function () {
-            ue.setContent("");
-        });
-    }
+    data = data.applyFlow;
+    $("#id").val(data.id);
+    $("#name").textbox('setValue',data.name);
+    $("#img").val(data.img);
+    $("#imgimg").attr("src", data.img);
+    $("#time").val(dateFormate(data.time, false));
+    var ue = UE.getEditor('container');
+    ue.addListener("ready", function () {
+        ue.setContent(data.content);
+    });
+    //ue.setContent(data.content);
     $("#edit-win").window("open");
 }
 // 删除
@@ -93,7 +40,7 @@ function del(data){
     $.messager.confirm("确认", "确定删除该数据", function (r) {
         if (r) {
             $.post(
-                "/admin/deleteProduct",
+                "/admin/deleteContact",
                 {
                     id : data.id
                 },
@@ -124,10 +71,10 @@ function save(){
     var ue = UE.getEditor('container');
     var content = ue.getContent();
     $.post(
-        "/admin/saveProduct",
+        "/admin/saveContact",
         {
             id      : $("#id").val(),
-            type    : $("#type").val(),
+            type    : 0,
             name    : $("#name").val(),
             time    : $("#time").val(),
             img     : $("#img").val(),
@@ -135,8 +82,8 @@ function save(){
         },
         function(data){
             $.messager.alert('',data.msg,'');
-            $("#edit-win").window("close");
-            $('#data-list').datagrid('reload');
+            //$("#edit-win").window("close");
+            //$('#data-list').datagrid('reload');
         }
     );
 };
